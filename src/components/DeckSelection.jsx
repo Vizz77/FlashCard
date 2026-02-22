@@ -107,16 +107,16 @@ const DeckSelection = ({ onSelectDeck }) => {
                     }}
                     onMouseEnter={e => {
                         e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.borderColor = '#3296ff';
-                        e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(50, 150, 255, 0.3)';
+                        e.currentTarget.style.borderColor = '#ff6b35';
+                        e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(255, 107, 53, 0.3)';
                     }}
                     onMouseLeave={e => {
                         e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.borderColor = 'rgba(50, 150, 255, 0.3)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 107, 53, 0.3)';
                         e.currentTarget.style.boxShadow = 'none';
                     }}
                 >
-                    <Code size={48} color="#3296ff" style={{ marginBottom: '1.5rem' }} />
+                    <Code size={48} color="#ff6b35" style={{ marginBottom: '1.5rem' }} />
                     <h2 style={{ fontSize: '1.5rem', margin: 0 }}>SO</h2>
                     <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Prog. Languages</p>
                 </button>
