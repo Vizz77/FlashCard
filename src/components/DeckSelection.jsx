@@ -88,6 +88,41 @@ const DeckSelection = ({ onSelectDeck }) => {
                     <h2 style={{ fontSize: '1.5rem', margin: 0 }}>LPP</h2>
                     <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Prog. Languages</p>
                 </button>
+
+                <button
+                    onClick={() => onSelectDeck('so')}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '200px',
+                        height: '250px',
+                        backgroundColor: 'var(--bg-secondary)',
+                        border: '2px solid rgba(50, 150, 255, 0.3)',
+                        borderRadius: '16px',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        color: 'var(--text-primary)'
+                    }}
+                    onMouseEnter={e => {
+                        e.currentTarget.style.transform = 'translateY(-5px)';
+                        e.currentTarget.style.borderColor = '#3296ff';
+                        e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(50, 150, 255, 0.3)';
+                    }}
+                    onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.borderColor = 'rgba(50, 150, 255, 0.3)';
+                        e.currentTarget.style.boxShadow = 'none';
+                    }}
+                >
+                    <Code size={48} color="#3296ff" style={{ marginBottom: '1.5rem' }} />
+                    <h2 style={{ fontSize: '1.5rem', margin: 0 }}>SO</h2>
+                    <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Prog. Languages</p>
+                </button>
+
+
+
             </div>
         </div>
     );
