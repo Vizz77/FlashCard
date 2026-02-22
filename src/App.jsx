@@ -10,7 +10,7 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 // Import raw CSVs
 import calculusCSV from '../cards_calculus.csv?raw';
 import lppCSV from '../cards_lpp.csv?raw';
-import soCSV from '../cards_soc.csv?raw';
+import soCSV from '../cards_so.csv?raw';
 
 function App() {
   const [currentDeck, setCurrentDeck] = useState(null); // 'calculus' or 'lpp'
@@ -26,6 +26,9 @@ function App() {
     if (currentDeck === 'lpp') {
       root.style.setProperty('--accent-green', '#3296ff'); // Blue for LPP
       root.style.setProperty('--accent-color', '#3296ff');
+    } else if (currentDeck === 'so') {
+      root.style.setProperty('--accent-green', '#ff6b35'); // Orange for SO
+      root.style.setProperty('--accent-color', '#ff6b35');
     } else {
       root.style.setProperty('--accent-green', '#00fa9a'); // Green for Calculus (default)
       root.style.setProperty('--accent-color', '#00fa9a');
@@ -38,7 +41,7 @@ function App() {
     setIsFlipped(false);
 
     try {
-      const csvContent = deckName === 'lpp' ? lppCSV : calculusCSV;
+      const csvContent = deckName === 'so' ? soCSV : deckName === 'lpp' ? lppCSV : calculusCSV;
       const parsedCards = await parseCSV(csvContent);
       setCards(parsedCards);
 
