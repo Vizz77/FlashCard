@@ -10,6 +10,7 @@ import { Loader2, ArrowLeft } from 'lucide-react';
 // Import raw CSVs
 import calculusCSV from '../cards_calculus.csv?raw';
 import lppCSV from '../cards_lpp.csv?raw';
+import soCSV from '../cards_soc.csv?raw';
 
 function App() {
   const [currentDeck, setCurrentDeck] = useState(null); // 'calculus' or 'lpp'
