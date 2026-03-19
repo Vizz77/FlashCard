@@ -2,50 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import './Flashcard.css';
 
 const Flashcard = ({ card, isFlipped, onFlip }) => {
-    const faceStyle = (isBack = false) => ({
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        backfaceVisibility: 'hidden',
-        backgroundColor: 'var(--bg-card)',
-        color: 'var(--text-primary)',
-        transform: isBack ? 'rotateY(180deg)' : 'none',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        padding: '2rem',
-        boxSizing: 'border-box',
-        borderRadius: '16px',
-        border: isBack ? '1px solid var(--accent-green)' : '1px solid rgba(255,255,255,0.05)',
-        textAlign: 'center',
-    });
-
-    const faceTitleStyle = {
-        marginBottom: '1.5rem',
-        marginTop: 0,
-        textTransform: 'uppercase',
-        fontSize: '0.9rem',
-        letterSpacing: '2px',
-        opacity: 0.8,
-        flexShrink: 0,
-    };
-
-    const faceContentStyle = {
-        width: '100%',
-        flex: 1,
-        minHeight: 0,
-        overflowY: 'auto',
-        paddingRight: '0.5rem',
-        lineHeight: '1.6',
-        fontSize: 'clamp(1rem, 2vw, 1.5rem)',
-        fontWeight: '600',
-        overflowWrap: 'anywhere',
-        wordBreak: 'break-word',
-    };
-
     // Parsing content to detect LaTeX vs normal text could be complex.
     // For this simplified version, we assume the content is mixed. 
     // We can use a regex to split by $...$ for inline math.
@@ -72,31 +31,23 @@ const Flashcard = ({ card, isFlipped, onFlip }) => {
     };
 
     return (
-        <div className="flashcard-container" style={{ perspective: 1000, height: '300px', width: '100%', cursor: 'pointer' }} onClick={onFlip}>
+        <div className="flashcard-container" onClick={onFlip}>
             <motion.div
                 className="flashcard-inner"
                 initial={false}
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    position: 'relative',
-                    transformStyle: 'preserve-3d',
-                    boxShadow: '0 10px 30px -5px rgba(0, 250, 154, 0.1)',
-                    borderRadius: '16px',
-                }}
             >
                 {/* Front */}
-                <div style={faceStyle()}>
-                    <h3 style={{ ...faceTitleStyle, color: 'var(--accent-green)' }}>Front</h3>
-                    <div style={faceContentStyle}>{renderContent(card.front)}</div>
+                <div className="flashcard-face flashcard-face--front">
+                    <h3 className="flashcard-title flashcard-title--front">Front</h3>
+                    <div className="flashcard-content">{renderContent(card.front)}</div>
                 </div>
 
                 {/* Back */}
-                <div style={faceStyle(true)}>
-                    <h3 style={{ ...faceTitleStyle, color: 'var(--text-secondary)' }}>Back</h3>
-                    <div style={faceContentStyle}>{renderContent(card.back)}</div>
+                <div className="flashcard-face flashcard-face--back">
+                    <h3 className="flashcard-title flashcard-title--back">Back</h3>
+                    <div className="flashcard-content">{renderContent(card.back)}</div>
                 </div>
             </motion.div>
         </div>
