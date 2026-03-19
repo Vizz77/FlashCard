@@ -1,9 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
 const Flashcard = ({ card, isFlipped, onFlip }) => {
+    const faceStyle = (isBack = false) => ({
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backfaceVisibility: 'hidden',
+        backgroundColor: 'var(--bg-card)',
+        color: 'var(--text-primary)',
+        transform: isBack ? 'rotateY(180deg)' : 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        padding: '2rem',
+        boxSizing: 'border-box',
+        borderRadius: '16px',
+        border: isBack ? '1px solid var(--accent-green)' : '1px solid rgba(255,255,255,0.05)',
+        textAlign: 'center',
+    });
+
+    const faceTitleStyle = {
+        marginBottom: '1.5rem',
+        marginTop: 0,
+        textTransform: 'uppercase',
+        fontSize: '0.9rem',
+        letterSpacing: '2px',
+        opacity: 0.8,
+        flexShrink: 0,
+    };
+
+    const faceContentStyle = {
+        width: '100%',
+        flex: 1,
+        minHeight: 0,
+        overflowY: 'auto',
+        paddingRight: '0.5rem',
+        lineHeight: '1.6',
+        fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+        fontWeight: '600',
+        overflowWrap: 'anywhere',
+        wordBreak: 'break-word',
+    };
+
     // Parsing content to detect LaTeX vs normal text could be complex.
     // For this simplified version, we assume the content is mixed. 
     // We can use a regex to split by $...$ for inline math.
@@ -46,52 +88,15 @@ const Flashcard = ({ card, isFlipped, onFlip }) => {
                 }}
             >
                 {/* Front */}
-                <div style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    backfaceVisibility: 'hidden',
-                    backgroundColor: 'var(--bg-card)',
-                    color: 'var(--text-primary)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '2rem',
-                    boxSizing: 'border-box',
-                    borderRadius: '16px',
-                    border: '1px solid rgba(255,255,255,0.05)',
-                    textAlign: 'center',
-                    fontSize: '1.5rem',
-                    fontWeight: '600',
-                }}>
-                    <h3 style={{ color: 'var(--accent-green)', marginBottom: '1.5rem', marginTop: 0, textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px', opacity: 0.8 }}>Front</h3>
-                    <div style={{ lineHeight: '1.6' }}>{renderContent(card.front)}</div>
+                <div style={faceStyle()}>
+                    <h3 style={{ ...faceTitleStyle, color: 'var(--accent-green)' }}>Front</h3>
+                    <div style={faceContentStyle}>{renderContent(card.front)}</div>
                 </div>
 
                 {/* Back */}
-                <div style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    backfaceVisibility: 'hidden',
-                    backgroundColor: 'var(--bg-card)',
-                    color: 'var(--text-primary)',
-                    transform: 'rotateY(180deg)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '2rem',
-                    boxSizing: 'border-box',
-                    borderRadius: '16px',
-                    border: '1px solid var(--accent-green)',
-                    textAlign: 'center',
-                    fontSize: '1.5rem',
-                    fontWeight: '600',
-                }}>
-                    <h3 style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', marginTop: 0, textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px', opacity: 0.8 }}>Back</h3>
-                    <div style={{ lineHeight: '1.6' }}>{renderContent(card.back)}</div>
+                <div style={faceStyle(true)}>
+                    <h3 style={{ ...faceTitleStyle, color: 'var(--text-secondary)' }}>Back</h3>
+                    <div style={faceContentStyle}>{renderContent(card.back)}</div>
                 </div>
             </motion.div>
         </div>
